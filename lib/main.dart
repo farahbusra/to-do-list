@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: const MyHomePage(title: 'My To-do List'),
+      home: const TodoList(title: 'My To-do List'),
     );
   }
 }
@@ -25,16 +25,16 @@ class Task {
   String? description;
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class TodoList extends StatefulWidget {
+  const TodoList({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TodoList> createState() => _TodoListState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TodoListState extends State<TodoList> {
   final _textDescController = TextEditingController();
   final _textTitleController = TextEditingController();
   List<Task> todoList = [];
@@ -46,10 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            // color: Colors.red,
               padding: EdgeInsets.all(20.0),
               child: TextField(
                 controller: _textTitleController,
@@ -60,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
               )
           ),
           Container(
-            // color: Colors.red,
               padding: EdgeInsets.all(20.0),
               child: TextField(
                 controller: _textDescController,
@@ -76,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               itemCount: todoList.length,
               itemBuilder: (BuildContext context, int index){
                 return ListTile(
-                  title: Text(todoList[index].title??'',style: TextStyle(color: Colors.blue),),
+                  title: Text(todoList[index].title??'empty', style: TextStyle(color: Colors.blue),),
                   subtitle: Text(todoList[index].description??'empty',
                     style: TextStyle(color: Colors.blue),),
                 );
